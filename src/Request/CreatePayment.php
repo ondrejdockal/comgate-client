@@ -104,6 +104,11 @@ class CreatePayment implements RequestInterface
      */
     private $eetData;
 
+	/**
+	 * @var string
+	 */
+	private $endPoint = 'create';
+
     /**
      * @param int    $price (price in heller so for 10 CZK you must set 1000)
      * @param string $refId (for example orderId)
@@ -580,15 +585,13 @@ class CreatePayment implements RequestInterface
         return true;
     }
 
-
-    /**
-     * @return string
-     */
-    public function getEndPoint()
-    {
-        return 'create';
-    }
-
+	/**
+	 * @return string
+	 */
+	public function getEndPoint()
+	{
+		return $this->endPoint;
+	}
 
     /**
      * @return string
