@@ -27,6 +27,11 @@ class CreatePayment implements RequestInterface
     /**
      * @var string
      */
+    private $fullName;
+
+    /**
+     * @var string
+     */
     private $label;
 
     /**
@@ -119,11 +124,12 @@ class CreatePayment implements RequestInterface
      *
      * @throws LabelTooLongException
      */
-    public function __construct(int $price, string $refId, string $email, string $label, string $method = Method::ALL, string $curr = 'CZK')
+    public function __construct(int $price, string $refId, string $email, string $fullName, string $label, string $method = Method::ALL, string $curr = 'CZK')
     {
         $this->price  = $price;
         $this->refId  = $refId;
         $this->email  = $email;
+        $this->fullName  = $fullName;
         $this->method = $method;
         $this->curr   = $curr;
 
@@ -183,6 +189,15 @@ class CreatePayment implements RequestInterface
     {
         return $this->email;
     }
+
+
+	/**
+	 * @return string
+	 */
+	public function getFullName(): string
+	{
+		return $this->fullName;
+	}
 
 
     /**
@@ -542,6 +557,7 @@ class CreatePayment implements RequestInterface
             'price' => $this->getPrice(),
             'refId' => $this->getRefId(),
             'email' => $this->getEmail(),
+            'fullName' => $this->getFullName(),
             'label' => $this->getLabel(),
             'method' => $this->getMethod(),
             'curr' => $this->getCurr()
